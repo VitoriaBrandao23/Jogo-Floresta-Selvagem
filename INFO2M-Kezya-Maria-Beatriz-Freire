@@ -1,0 +1,360 @@
+import pygame
+from pygame.locals import QUIT
+estamina = []
+
+class Animal:
+    def __init__(self, nome, cor, sexo, idade,raca, velocidade, posicao_X, posicao_Y):
+        self.nome = nome
+        self.cor = cor
+        self.sexo = sexo
+        self.idade = idade
+        self.raca = raca
+        self.velocidade = velocidade
+        self.posicao_X = posicao_X
+        self.posicao_Y = posicao_Y
+    # Método Get
+    def getNome(self):
+        return self.nome
+
+    def getCor(self):
+        return self.cor
+
+    def getSexo(self):
+        return self.sexo
+
+    def getIdade(self):
+        return self.idade
+
+    def getRaca(self):
+        return self.raca
+
+    def getVelocidade(self):
+        return self.velocidade
+
+    def getPosicao_X(self):
+        return self.posicao_X
+
+    def getPosicao_Y(self):
+        return self.posicao_Y
+
+    # Método Set
+    def setNome(self, nome):
+        self.nome = nome
+
+    def setCor(self, cor):
+        self.cor = cor
+
+    def setSexo(self, sexo):
+        self.sexo = sexo
+
+    def setIdade(self, idade):
+        self.idade = idade
+
+    def setRaca(self, raca):
+        self.raca = raca
+
+    def setVelocidade(self, velocidade):
+        self.velocidade = velocidade
+
+    def setPosicao_X(self, posicao_X):
+        self.posicao_X = posicao_X
+
+    def setPosicao_Y(self, posicao_Y):
+        self.posicao_Y = posicao_Y
+      
+    def caracteristicas(self):
+        print(f"Nome: {self.nome}\nCor: {self.cor}\nSexo: {self.sexo}")
+        print(f"Idade:{self.idade}\nraça: {self.raça}")
+        print(f"Velocidade: {self.velocidade}\nposicãox:{self.posicao_X}")
+        print(f"posiçãoy: {self.posicao_Y}")
+      
+class Leao(Animal):
+    def __init__(self, nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y):
+        super().__init__(nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y)
+    
+class Cachorro(Animal):
+    def __init__(self, nome, cor, sexo, idade, raca, velocidade,  posicao_X, posicao_Y):
+        super().__init__(nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y)
+    
+class Gato(Animal):
+    def __init__(self, nome,cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y):
+        super().__init__(nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y)
+          
+class Vaca(Animal):
+    def __init__(self, nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y):
+        super().__init__(nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y)
+      
+class Jacare(Animal):
+    def __init__(self, nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y):
+        super().__init__(nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y)
+    
+class Capivara(Animal):
+    def __init__(self, nome, cor, sexo, idade, raca, velocidade, posicao_X, posicao_Y):
+        super().__init__(nome, idade, cor, sexo, raca, velocidade, posicao_X, posicao_Y)
+
+# Objetos
+leao = Leao("Mufasa", "Marrom", "Macho", 10, "Leão-Africano", 10, -50, -30)
+dog = Cachorro("Elvis", "Branco", "Macho", 8, "Vira-Lata", 10, -15, -35)
+cat = Gato("Lady", "Cinza", "Fêmea", 12, "Gato Persa", 10, -180, -8)
+vaca = Vaca("Mimosa", "Branca com manchas pretas", "Fêmea", 10, "Holstein-Frísia", 70, 85, 43)
+jacare = Jacare("Tic Tac", "Verde", "Macho", 8, "Jacaré-do-papo-amarelo", 10, 50, 200)
+capivara = Capivara("Filó", "Marrom", "Fêmea", 12, "não especificado", 10, -38, -5)
+leao2 = Leao("Simba", "Amarelo", "Macho", 9, "Leão-Africano", 10, -15, 45)
+
+class Funcionamento:
+    def __init__(self):
+        pygame.init()
+        self.tela = pygame.display.set_mode((500, 400))
+        pygame.display.set_caption("Floresta Selvagem")
+        self.musica_de_fundo = pygame.mixer.music.load("pacman background music.ogg")
+        pygame.mixer.music.play(-1)
+        self.menu = pygame.image.load('1_resized (1).png')
+        self.instrucoes = pygame.image.load("2_resized.png")
+        self.instrucoes_2 = pygame.image.load("3_resized.png")
+        self.digito_da_estamina = pygame.image.load("5_resized.png")
+        self.perdeu=pygame.image.load("15_resized.png")
+        self.jogo=pygame.image.load("Defina a estamina (7)_resized.png")
+        self.PERDEU=pygame.image.load("Defina a estamina (7)_resized.png")
+        self.GANHOU=pygame.image.load("Defina a estamina (7)_resized.png")
+        self.capivaraimg=pygame.image.load("Defina_a_estamina__1_-removebg-preview.png")
+        self.leaoimg=pygame.image.load("Defina_a_estamina__2_-removebg-preview.png")
+        self.cachorroimg=pygame.image.load("Defina_a_estamina__3_-removebg-preview.png")
+        self.cena = "Menu"
+        self.loop = True
+        self.animais = []
+       #sons adicionais dos animais:
+        self.som_gato = pygame.mixer.Sound ("gato.mp3")
+        self.som_cachorro = pygame.mixer.Sound ("0000991_[cut_5sec].mp3")
+        self.som_leao = pygame.mixer.Sound("lion_roar.mp3")
+        self.som_jacare =pygame.mixer.Sound ("Krokodil.mp3")
+        self.som_vaca = pygame.mixer.Sound("vaca-mugindo.mp3")
+        self.som_capivara = pygame.mixer.music.load("pio de capivara.mp3")
+  #metodos para execultar sons:
+    def rugir(self):
+      self.som_leao.play()
+    def latir(self):
+      self.som_cachorro.play()
+    def miar(self):
+      self.som_gato.play()
+    def mugir(self):
+      self.som_vaca.play()
+    def bramir(self):
+      self.som_jacare.play()
+    def assobiar(self):
+      self.som_capivara.play()
+
+    def exibir_menu(self):
+        self.tela.blit(self.menu, (0, 0))
+
+    def exibir_instrucoes(self):
+        self.tela.blit(self.instrucoes, (0, 0))
+
+    def exibir_instrucoes2(self):
+        self.tela.blit(self.instrucoes_2, (0, 0))
+
+    def exibir_PERDEU(self):
+        self.tela.blit(self.PERDEU, (0, 0))
+    def exibir_GANHOU(self):
+        self.tela.blit(self.GANHOU, (0, 0))
+
+    def exibir_digito_da_estamina(self):
+        self.tela.blit(self.digito_da_estamina, (0, 0))
+    def exibir_o_jogo(self):
+        self.tela.blit(self.jogo,(0,0))
+
+    def andar(self):
+      print("O animal está andando")
+    def colisao(self):
+        print("os animais estão colidindo")
+
+    def exibir_leao(self):
+      x = -50 
+      y = -30
+      self.tela.blit(self.leao, (x, y))
+
+    def exibir_gato(self):
+      pos_x_g = -180
+      pos_y_g = -8
+      self.tela.blit(self.gato, (pos_x_g, pos_y_g))
+
+    def exibir_capivara(self):
+      pos_x_cap = -38
+      pos_y_cap = -5
+      self.tela.blit(self.capivara, (pos_x_cap, pos_y_cap))
+
+    def exibir_vaca(self):
+      pos_x_vc = 70
+      pos_y_vc = 85
+      self.tela.blit(self.vaca, (pos_x_vc, pos_y_vc))
+
+    def exibir_cao(self):
+      pos_x_cao = -15
+      pos_y_cao = -35
+      self.tela.blit(self.cao, (pos_x_cao, pos_y_cao))
+
+    def exibir_jacare(self):
+      pos_x_jc = 50
+      pos_y_jc = 200
+      self.tela.blit(self.jacare, (pos_x_jc, pos_y_jc))
+
+    def exibir_leao2(self):
+      pos_x_le = -15
+      pos_y_le = 45
+      self.tela.blit(self.leao2, (pos_x_le, pos_y_le))
+      
+    def jogo(self):
+      self.tela.blit(self.fundo, (0, 0))
+      self.exibir_leao()
+      self.exibir_gato()
+      self.exibir_capivara()
+      self.exibir_vaca()
+      self.exibir_cao()
+      self.exibir_jacare()
+      self.exibir_leao2()
+  
+    def eventos_de_tecla(self):
+        for event in pygame.event.get():
+            if event.type == quit:
+                self.loop = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    if self.cena == "Menu":
+                        self.cena = "Instrucoes"
+                    elif self.cena == "Instrucoes":
+                        self.cena = "Menu"
+                elif event.key == pygame.K_x:
+                    if self.cena == "Instrucoes":
+                        self.cena = "instrucoes2"
+                    elif self.cena == "instrucoes2":
+                        self.cena = "Instrucoes"       
+                elif event.key == pygame.K_z:
+                    if self.cena == "instrucoes2":
+                        self.cena = "escolha da estamina"
+                    elif self.cena == "escolha da estamina":
+                        self.cena = "instrucoes2"  
+                elif event.key == pygame.K_e:
+                      if self.cena == "escolha da estamina":
+                        print("\nDIGITE A ENERGIA DE CADA ANIMAL\n\nObs: Você não saberá para qual animal está dando a energia escolhida\n")
+                        leao_est = int(input("Estamina : "))
+                        dog_est = int(input("Estamina : "))
+                        cat_est = int(input("Estamina: "))
+                        vaca_est = int(input("Estamina: "))
+                        jacare_est = int(input("Estamina : "))
+                        cap_est = int(input("Estamina : "))
+                        leao2_est = int(input("Estamina : "))
+                        # Imprimindo as característica
+                        print("Animal Leão:")
+                        leao.caracteristicas()
+                        print("Estamina:",leao_est)
+                        print("Animal Cachorro:")
+                        dog.caracteristicas()
+                        print("Estamina:",dog_est)
+                        print("Animal Gato:")
+                        cat.caracteristicas()
+                        print("Estamina:",cat_est)
+                        print("Animal Vaca:")
+                        vaca.caracteristicas()
+                        print("Estamina:",vaca_est)
+                        print("Animal Jacaré:")
+                        jacare.caracteristicas()
+                        print("Estamina:",jacare_est)
+                        print("Animal Capivara:")
+                        capivara.caracteristicas()
+                        print("Estamina:",cap_est)
+                        print("Animal Leão número 2:")
+                        leao2.caracteristicas()
+                        print("Estamina:",leao2_est)
+                        self.cena="jogo"
+                
+                      #esquema andar:
+                      rodada=0
+                      velocidade=10
+                      x = -50
+                      y = -30
+                      while True:
+                        comandos= pygame.key.get_pressed()
+                        if rodada%2 == 0:
+                          if comandos[pygame.K_LEFT] and x >= -245:
+                            x-=velocidade
+                            #andar()
+                          if comandos[pygame.K_RIGHT] and x <= 195:
+                            x+=velocidade
+                        else:
+                          if comandos[pygame.K_UP] and y >= -25:
+                            y-=velocidade
+                            #andar() -colocar o nome do objeto -
+                          if comandos[pygame.K_DOWN] and y <= 305:
+                            y+=velocidade
+                        #colisão
+                        if x==-38 and y==-5:
+                          self.colisao()
+                          self.assobiar()
+                          self.rugir()
+                          print("roaaaaaaar\npio pio pio")
+                          print("Você sobreviveu ao embate da selva!\nContinue")
+                        if x==-15 and y==-35:
+                          self.colisao()
+                          self.rugir()
+                          self.latir()
+                          print("roaaaaaaaar\nau au au")
+                          print("Você sobreviveu ao embate da selva!\nContinue")
+                        if x==70 and y==85:
+                          self.colisao()
+                          self.rugir()
+                          self.mugir()
+                          print("roaaaaaaaar\nmuuuuuuuu")
+                          print("Você sobreviveu ao embate da selva!\nContinue")
+                        if x==50 and y==200 :
+                          self.colisao()
+                          self.rugir()
+                          self.bramir()
+                          print("roaaaaar\nbramir")
+                        if x==-180 and y==-8:
+                          self.colisao()
+                          self.rugir()
+                          self.miar()
+                          print("roaaaaaaar\nmiau miau")
+                          print("Você sobreviveu ao embate da selva!\nContinue")
+                        if x==-15 and y==45:
+                          self.colisao()
+                          self.rugir()
+                          self.rugir()
+                          print("roaaaaar\nroaaaaaaar")
+                          self.cena = "PERDEU"
+
+                        if leao_est== 0:
+                          self.cena = "PERDEU"
+                          
+                        leao_est-=10
+                        rodada+=1
+                        pygame.display.update()
+                        
+                        pygame.quit()       
+                
+                                            
+    def executar_jogo(self):
+        while self.loop:
+            self.eventos_de_tecla()
+            if self.cena == "Menu":
+                self.exibir_menu()
+            elif self.cena == "instrucoes":
+                self.exibir_instrucoes()
+            elif self.cena == "instrucoes2":
+                self.exibir_instrucoes2()
+            elif self.cena == "escolha da estamina":
+                self.exibir_digito_da_estamina()
+            elif self.cena=="jogo":
+                self.exibir_o_jogo()
+                
+            elif self.cena=="GANHOU":
+               self.exibir_PERDEU()
+            elif self.cena=="PERDEU":
+              self.exibir_GANHOU()
+            pygame.display.update()
+
+        pygame.quit()
+
+if __name__ == "__main__":
+    jogo = Funcionamento()
+    jogo.executar_jogo()
