@@ -1,14 +1,12 @@
 from time import sleep
 
 class Animal:
-    def __init__(self, nome, cor, sexo, idade, raca, posicao_X, posicao_Y):
+    def __init__(self, nome, cor, sexo, idade, raca):
         self.nome = nome
         self.cor = cor
         self.sexo = sexo
         self.idade = idade
         self.raca = raca
-        self.posicao_X = posicao_X
-        self.posicao_Y = posicao_Y
     
     #Método Get
   
@@ -27,12 +25,6 @@ class Animal:
     def getRaca(self):
         return self.raca
 
-    def getPosicao_X(self):
-        return self.posicao_X
-
-    def getPosicao_Y(self):
-        return self.posicao_Y
-
     #Método Set
     def setNome(self, nome):
         self.nome = nome
@@ -48,24 +40,17 @@ class Animal:
 
     def setRaca(self, raca):
         self.raca = raca
-
-    def setPosicao_X(self, posicao_X):
-        self.posicao_X = posicao_X
-
-    def setPosicao_Y(self, posicao_Y):
-        self.posicao_Y = posicao_Y
       
     def caracteristicas(self):
         print(f"Nome: {self.nome}\nCor: {self.cor}\nSexo: {self.sexo}")
         print(f"Idade:{self.idade}\nRaça: {self.raca}")
-        print(f"Posicão eixo X:{self.posicao_X}\nPosição eixo Y: {self.posicao_Y}")
 
     def colisao(self):
       print("Animais colidindo!")
     
 class Leao(Animal):
-    def __init__(self, nome, cor, sexo, idade, raca, posicao_X, posicao_Y):
-        super().__init__(nome, cor, sexo, idade, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def rugir(self):
         print("ROAR ROAR ROAR")
@@ -83,53 +68,53 @@ class Leao(Animal):
         self.posicao_X += 1
     
 class Cachorro(Animal):
-    def __init__(self, nome, cor, sexo, idade, raca,  posicao_X, posicao_Y):
-        super().__init__(nome, cor, sexo, idade, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def latir(self):
         print("AU AU AU")
 
 class Gato(Animal):
-    def __init__(self, nome,cor, sexo, idade, raca, posicao_X, posicao_Y):
-        super().__init__(nome, cor, sexo, idade, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def miar(self):
         print("MIAU MIAU MIAU")
     
 class Vaca(Animal):
-    def __init__(self, nome, cor, sexo, idade, raca, posicao_X, posicao_Y):
-        super().__init__(nome, cor, sexo, idade, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def mugir(self):
         print("MUU MUU MUU")
 
 class Jacare(Animal):
-    def __init__(self, nome, cor, sexo, idade, raca, posicao_X, posicao_Y):
-        super().__init__(nome, cor, sexo, idade, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def bramir(self):
         print("ROOR ROOR ROOR")
 
 class Capivara(Animal):
-    def __init__(self, nome, idade, cor, sexo, raca, posicao_X, posicao_Y):
-        super().__init__(nome, idade, cor, sexo, raca, posicao_X, posicao_Y)
+    def __init__(self, nome, cor, sexo, idade, raca):
+        super().__init__(nome, cor, sexo, idade, raca)
     
     def assobiar(self):
         print("AHN AHN AHN")
 
 #Objetos
-leao = Leao("Mufasa", "Marrom", "Macho", 10, "Leão-Africano", "-", "-")
-dog = Cachorro("Elvis", "Branco", "Macho", 8, "Vira-Lata", "-", "-")
-cat = Gato("Lady", "Cinza", "Fêmea", 12, "Gato Persa", "-", "-")
-vaca = Vaca("Mimosa", "Branca com manchas pretas", "Fêmea", 10, "Holstein-Frísia", "-", "-")
-jacare = Jacare("Tic Tac", "Verde", "Macho", 8, "Jacaré-do-papo-amarelo", "-", "-")
-capivara = Capivara("Filó", "Marrom", "Fêmea", 12, "não especificado", "-", "-")
-leao2 = Leao("Simba", "Amarelo", "Macho", 9, "Leão-Africano", "-", "-")
+leao = Leao("Mufasa", "Marrom", "Macho", 10, "Leão-Africano")
+dog = Cachorro("Elvis", "Branco", "Macho", 8, "Vira-Lata")
+cat = Gato("Lady", "Cinza", "Fêmea", 12, "Gato Persa")
+vaca = Vaca("Mimosa", "Branca com manchas pretas", "Fêmea", 10, "Holstein-Frísia")
+jacare = Jacare("Tic Tac", "Verde", "Macho", 8, "Jacaré-do-papo-amarelo")
+capivara = Capivara("Filó", "Marrom", "Fêmea", 12, "não especificado")
+leao2 = Leao("Simba", "Amarelo", "Macho", 9, "Leão-Africano")
 
 #INICIO
 print(""*15,"JOGO FLORESTA SELVAGEM\n")
 print(""*15, "REGRAS DO JOGO")
-print("\nNo jogo existem 7 animais, e você jogará com o Leão1, tendo como missão eliminar todos os animais menos o Leão2.\nCaso você colida com o Leão2, você perderá o jogo!\nE atenção na sua energia! Se ela acabar, você morrerá na floresta!\n\nBoa sorte!")
+print("\nNo jogo existem 7 animais, e você jogará com o Leão1, tendo como missão eliminar todos os animais menos o Leão2\nCaso você colida com o Leão2, você perderá o jogo!\nE atenção na sua energia! Se ela acabar, você morrerá na floresta!\n\nBoa sorte!")
 print("\nPara começar a batalha animal, por favor, preencha as informações a seguir:")
 
 #Instruções
@@ -254,7 +239,7 @@ def mover_objeto(matriz, x, y, direcao_x, direcao_y):
     matriz[novo_y][novo_x] = Ob1
     return novo_x, novo_y
 
-def criar_outros_objetos(matriz, num_outros_objetos,n,nu,num,num_,num_o):
+def criar_outros_objetos(matriz, num_outros_objetos, n, nu, num, num_, num_o):
     for _ in range(num_outros_objetos):
         x, y = criar_objeto(matriz)
         matriz[y][x] = Ob2
@@ -288,9 +273,9 @@ num = 1
 num_ = 1
 num_o = 1
 
-criar_outros_objetos(matriz, num_outros_objetos,n,nu,num,num_,num_o)
-rodada=0
-l=leao_est
+criar_outros_objetos(matriz, num_outros_objetos, n, nu, num, num_, num_o)
+rodada = 0
+l = leao_est
 #Loop principal do jogo
 while True:
     print_matriz(matriz)
@@ -305,7 +290,7 @@ while True:
     
     print ("\nA rodada definirá para onde você pode se mover\n\nRodada =",rodada)
     print("\nÍmpar para a esquerda ou para a direita\nPar para cima ou para baixo")
-    if rodada%2==0:
+    if rodada%2 == 0:
        direcao = input("\nPara onde deseja mover o objeto?\n\nc - cima\nb - baixo\ns para encerrar: ").lower()
        if direcao == 's':
         break
