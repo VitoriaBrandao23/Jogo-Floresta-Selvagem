@@ -156,13 +156,13 @@ import random
 
 tamanho_matriz = 10
 
-Ob1= "1"
-Ob2= "2"
-Ob3= "C"
-Ob4= "J"
-Ob5= "G"
-Ob6= "D"
-Ob7= "V"
+Ob1= "Leão1"
+Ob2= "Leão2"
+Ob3= "Capivara"
+Ob4= "Jacaré"
+Ob5= "Gato"
+Ob6= "Cachorro"
+Ob7= "Vaca"
 
 #Imprimir a matriz
 def print_matriz(matriz):
